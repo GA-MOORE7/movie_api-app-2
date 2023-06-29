@@ -1,9 +1,11 @@
-// 1. require express/morgan in the 'index.js' file
+// require express/morgan in the 'index.js' file
 const express = require('express');
-    morgan = require('morgan');
     const app = express();
+    // const morgan = require('morgan');
 
-//  2. json object of my top 10 movies:
+    // app.use(morgan('common'));
+
+//  json object of my top 10 movies:
     let topMovies = [
     {
         title: 'Lord of the Rings',
@@ -37,31 +39,32 @@ const express = require('express');
     }
 ];
 
-// 5. Morgan middleware library to log all requests
+// Morgan middleware library to log all requests
 let myLogger = (req, res, next) => {
     console.log(req.url);
     next();
 };
 
-// 2. Express GET route
+// Express GET route
 app.get('/movies', (req, res) => {
     res.json(topMovies);
 });
 
-// 3. Express GET route located at endpoint '/'
+// Express GET route located at endpoint '/'
 app.get('/', (req, res) => {
     res.send('Welcome to my top 10 movies!')
 });
 
-// listen for requests
+
+// Listen for requests
 app.listen(8080, () => {
     console.log('Your app is listening on port 8080')
 });
 
-// 4. Use express.static to serve 'documentation.html' file from public folder
+// Use express.static to serve 'documentation.html' file from public folder
 app.use('/documentation.html', express.static('public'));
 
-// 6. error-handling function
+// Error-handling function
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!')
