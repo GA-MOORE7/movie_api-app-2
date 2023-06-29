@@ -1,4 +1,4 @@
-// 1. require express in the 'index.js' file
+// 1. require express/morgan in the 'index.js' file
 const express = require('express');
     morgan = require('morgan');
     const app = express();
