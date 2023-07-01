@@ -1,9 +1,8 @@
 // require express/morgan in the 'index.js' file
 const express = require('express');
-    const app = express();
-    // const morgan = require('morgan');
-
-    // app.use(morgan('common'));
+const morgan = require('morgan');
+    const app = express();    
+    app.use(morgan('common'));
 
 //  json object of my top 10 movies:
     let topMovies = [
@@ -55,17 +54,22 @@ app.get('/', (req, res) => {
     res.send('Welcome to my top 10 movies!')
 });
 
-
-// Listen for requests
-app.listen(8080, () => {
-    console.log('Your app is listening on port 8080')
-});
-
 // Use express.static to serve 'documentation.html' file from public folder
 app.use('/documentation.html', express.static('public'));
+
+// Log all requests using Morgan:
+app.get('/secreturl', (req, res) => {
+    res.send('This is a secret url with super top-secret content.');
+});
 
 // Error-handling function
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!')
 })
+
+// Listen for requests
+app.listen(8080, () => {
+    console.log('Your app is listening on port 8080')
+});
+
