@@ -1,7 +1,9 @@
 // require express/morgan in the 'index.js' file
 const express = require('express');
-const morgan = require('morgan');
-    const app = express();    
+    morgan = require('morgan');
+
+    const app = express(); 
+       
     app.use(morgan('common'));
 
 //  json object of my top 10 movies:
@@ -43,6 +45,8 @@ let myLogger = (req, res, next) => {
     console.log(req.url);
     next();
 };
+
+// app.use(myLogger);
 
 // Express GET route
 app.get('/movies', (req, res) => {
