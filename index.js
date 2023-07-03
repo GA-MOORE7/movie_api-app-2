@@ -46,7 +46,7 @@ let myLogger = (req, res, next) => {
     next();
 };
 
-// app.use(myLogger);
+app.use(myLogger);
 
 // Express GET route
 app.get('/movies', (req, res) => {
