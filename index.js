@@ -6,6 +6,11 @@ const express = require('express');
        
     app.use(morgan('common'));
 
+    const PORT = 8080;     
+    
+// Serves a “documentation.html” file using express.static;
+    app.use(express.static('public'));
+
 //  json object of my top 10 movies:
     let topMovies = [
     {
@@ -58,9 +63,6 @@ app.get('/', (req, res) => {
     res.send('Welcome to my top 10 movies!')
 });
 
-// Use express.static to serve 'documentation.html' file from public folder
-app.use('/documentation.html', express.static('public'));
-
 // Log all requests using Morgan:
 app.get('/secreturl', (req, res) => {
     res.send('This is a secret url with super top-secret content.');
@@ -73,7 +75,7 @@ app.use((err, req, res, next) => {
 })
 
 // Listen for requests
-app.listen(8080, () => {
+app.listen(PORT, () => {
     console.log('Your app is listening on port 8080')
 });
 
