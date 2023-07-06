@@ -1,16 +1,11 @@
 // require express/morgan in the 'index.js' file
 const express = require('express');
     morgan = require('morgan');
-
     const app = express(); 
-       
+    const PORT = 8080;  
     app.use(morgan('common'));
-
-    const PORT = 8080;     
+    const { join } = require('path');        
     
-// Serves a “documentation.html” file using express.static;
-    app.use(express.static('public'));
-
 //  json object of my top 10 movies:
     let topMovies = [
     {
@@ -56,6 +51,13 @@ app.use(myLogger);
 // Express GET route
 app.get('/movies', (req, res) => {
     res.json(topMovies);
+});
+
+// Serves a “documentation.html” file using express.static;
+app.use(express.static(join(__dirname, 'public'))); 
+
+app.get('/documentation.html', (req, res) => {
+    res.sendFile(join(__dirname, 'public', 'documentation.html'));
 });
 
 // Express GET route located at endpoint '/'
