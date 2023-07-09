@@ -13,5 +13,93 @@
     
         <p>It will provide users with access to information about different
         movies, directors, and genres</p>
+
+        <h2>3. List of URL endpoints and request methods</h2>
+        <table border="1" width="400">
+            <tr>
+                <th>Business Logic</th>
+                <th>URL</th>
+                <th>HTTP Method</th>
+                <th>Request body data format</th>
+                <th>Response body data format</th>
+            </tr>
+            <tr>
+                <td>Return a list of all movies</td>
+                <td>/movies</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object holding data about all the movies</td>
+            </tr>
+            <tr>
+                <td>Return data about a single movie</td>
+                <td>/movies/:title</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object holding data about a single movie. Example:</td>
+            </tr>
+            <tr>
+                <td>Return data about a genre</td>
+                <td>/movies/genre/:genreName</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object holding data about a genre</td>
+            </tr>
+            <tr>
+                <td>Return data about a director</td>
+                <td>/movies/directors/:directorName</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object holding data about a director</td>
+            </tr>
+            <tr>
+                <td>Allow new users to register</td>
+                <td>/users</td>
+                <td>POST</td>
+                <td> A JSON object holding data about the user to add, structured like:
+                <pre>
+                    {
+                    "name": "Mary",
+                    "favoriteMovies":[]
+                }
+                </pre>
+                </td>
+                <td>A JSON object holding data about the user that was added, structured like:
+                    <pre>
+                        {
+                        "name": "Mary",
+                        "favoriteMovies":[],
+                        "id": "388bf9b0-c2b6-4f21-ad01-ebd74ca4ccba"
+                    }
+                    </pre></td>
+            </tr>
+            <tr>
+                <td>Allow users to update their user info</td>
+                <td>/users/:id</td>
+                <td>PUT</td>
+                <td>None</td>
+                <td>A JSON object with the updated info</td>
+            </tr>
+            <tr>
+                <td>Allow users to add a movie to their list of favorites</td>
+                <td>/users/:id/:movieTitle</td>
+                <td>PUT</td>
+                <td>None</td>
+                <td>Send user a message that the new movie has been added to their list</td>
+            </tr>
+            <tr>
+                <td>Allow users to remove a movie to their list of favorites</td>
+                <td>/users/:id/:movieTitle</td>
+                <td>DELETE</td>
+                <td>None</td>
+                <td>Send user a text message informing them that the movie has been deleted from their list</td>
+            </tr>
+            <tr>
+                <td>Allow existing users to de-register</td>
+                <td>/users/:id</td>
+                <td>DELETE</td>
+                <td>None</td>
+                <td>Send a text message indicating that the user has been deleted</td>
+            </tr>
+        </table>
     </body>
 </html>
