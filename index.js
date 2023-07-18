@@ -9,91 +9,91 @@ const express = require('express'),
 app.use(bodyParser.json());
 
 app.use(morgan('common'));
-const { join } = require('path');
+// const { join } = require('path');
 
     
 // json object of users
-    let users = [
-        {
-            id: 1,
-            name: "Gerald",
-            favoriteMovies: ["Lord of the Rings"]
-        },
-        {
-            id: 2,
-            name: "Kim",
-            favoriteMovies: ["The Mission"]
-        }
-    ]
+    // let users = [
+    //     {
+    //         id: 1,
+    //         name: "Gerald",
+    //         favoriteMovies: ["Lord of the Rings"]
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "Kim",
+    //         favoriteMovies: ["The Mission"]
+    //     }
+    // ]
     
 //  json object of my top 10 movies:
-    let movies = [
-    {
-        "Title": "Lord of the Rings",
-        "Description": "A saga of a group of sometimes reluctant heroes who set forth to save their world from consummate evil.",
-        "Genre": {
-            "Name": "Fantasy",
-            "Description": "a genre of speculative fiction involving magical elements, typically set in a fictional universe and usually inspired by mythology and folklore."
-        },
-        "Director": {
-            "Name": "Peter Jackson",
-            "Bio": "Sir Peter Jackson was born in Pukerua Bay Wellington in 1961. He began making movies at an early age using his parents' Super 8 camera. He left school at 17 and began shooting a science fiction comedy short, which three years later had grown into a 75-minute feature called Bad Taste.",
-            "Birth": 1961 
-        },
-    },
-    {
-        "Title": "The Mission",
-        "Description": "Jesuit priest Father Gabriel (Jeremy Irons) enters the Guarani lands in South America with the purpose of converting the natives to Christianity",
-        "Genre": {
-            "Name": "Adventure",
-            "Description": "The adventure genre is defined by having a strong element of danger in the story. Adventure stories are fast-paced and full of action"
-        },
-        "Director": {
-            "Name": "Roland Joffe",
-            "Bio": "Roland Joffé was born on November 17, 1945 in London, England, UK. He is a producer and director, known for The Mission (1986), The Killing Fields (1984) and The Great Hunger.",
-            "Birth": 1945 
-        },
-    },
-    {
-        "Title": "The Ghost and the Darkness",
-        "Description": "A bridge engineer and an experienced old hunter begin a hunt for two lions after they start attacking local construction workers.",
-        "Genre": {
-            "Name": "Thriller",
-            "Description": "a genre of fiction with numerous, often overlapping, subgenres, including crime, horror and detective fiction. "
-        },
-        "Director": {
-            "Name": "Stephen Hopkins",
-            "Bio": "Stephen Hopkins is a producer and director, known for Lost in Space (1998), A Nightmare on Elm Street: The Dream Child (1989) and Predator 2 (1990). ",
-            "Birth": 1958 
-        },
-    },
-    {
-        "Title": "Testament of Youth",
-        "Description": "Testament of Youth is a powerful coming-of-age story which tackles love, war, loss and remembrance. It's based on the beloved WW1 memoir by Vera Brittain.",
-        "Genre": {
-            "Name": "Historal Drama",
-            "Description": "Historical drama may include mostly fictionalized narratives based on actual people or historical events"
-        },
-        "Director": {
-            "Name": "James Kent",
-            "Bio": "James Kent is a British television and film director. He directed the feature films Testament of Youth and The Aftermath and the TV dramas The White Queen and The Secret Diaries of Miss Anne Lister.",
-            "Birth": 1962 
-        },
-    },
-    {
-        "Title": "The Land Before Time",
-        "Description": "A young Apatosaurus named Littlefoot ends up alone after his mother is attacked by a vicious Tyrannosaurus rex and dies. Littlefoot flees famine and upheaval to search for the Great Valley.",
-        "Genre": {
-            "Name": "Animation",
-            "Description": "An animated film is defined as a motion picture in which movement and characters' performances are created using a frame-by-frame technique"
-        },
-        "Director": {
-            "Name": "Don Bluth",
-            "Bio": "Don Bluth was one of the chief animators at Disney to come to the mantle after the great one's death. He eventually became the animation director for such films as The Rescuers (1977) and Pete's Dragon (1977). ",
-            "Birth": 1937 
-        },
-    },
-];
+//     let movies = [
+//     {
+//         "Title": "Lord of the Rings",
+//         "Description": "A saga of a group of sometimes reluctant heroes who set forth to save their world from consummate evil.",
+//         "Genre": {
+//             "Name": "Fantasy",
+//             "Description": "a genre of speculative fiction involving magical elements, typically set in a fictional universe and usually inspired by mythology and folklore."
+//         },
+//         "Director": {
+//             "Name": "Peter Jackson",
+//             "Bio": "Sir Peter Jackson was born in Pukerua Bay Wellington in 1961. He began making movies at an early age using his parents' Super 8 camera. He left school at 17 and began shooting a science fiction comedy short, which three years later had grown into a 75-minute feature called Bad Taste.",
+//             "Birth": 1961 
+//         },
+//     },
+//     {
+//         "Title": "The Mission",
+//         "Description": "Jesuit priest Father Gabriel (Jeremy Irons) enters the Guarani lands in South America with the purpose of converting the natives to Christianity",
+//         "Genre": {
+//             "Name": "Adventure",
+//             "Description": "The adventure genre is defined by having a strong element of danger in the story. Adventure stories are fast-paced and full of action"
+//         },
+//         "Director": {
+//             "Name": "Roland Joffe",
+//             "Bio": "Roland Joffé was born on November 17, 1945 in London, England, UK. He is a producer and director, known for The Mission (1986), The Killing Fields (1984) and The Great Hunger.",
+//             "Birth": 1945 
+//         },
+//     },
+//     {
+//         "Title": "The Ghost and the Darkness",
+//         "Description": "A bridge engineer and an experienced old hunter begin a hunt for two lions after they start attacking local construction workers.",
+//         "Genre": {
+//             "Name": "Thriller",
+//             "Description": "a genre of fiction with numerous, often overlapping, subgenres, including crime, horror and detective fiction. "
+//         },
+//         "Director": {
+//             "Name": "Stephen Hopkins",
+//             "Bio": "Stephen Hopkins is a producer and director, known for Lost in Space (1998), A Nightmare on Elm Street: The Dream Child (1989) and Predator 2 (1990). ",
+//             "Birth": 1958 
+//         },
+//     },
+//     {
+//         "Title": "Testament of Youth",
+//         "Description": "Testament of Youth is a powerful coming-of-age story which tackles love, war, loss and remembrance. It's based on the beloved WW1 memoir by Vera Brittain.",
+//         "Genre": {
+//             "Name": "Historal Drama",
+//             "Description": "Historical drama may include mostly fictionalized narratives based on actual people or historical events"
+//         },
+//         "Director": {
+//             "Name": "James Kent",
+//             "Bio": "James Kent is a British television and film director. He directed the feature films Testament of Youth and The Aftermath and the TV dramas The White Queen and The Secret Diaries of Miss Anne Lister.",
+//             "Birth": 1962 
+//         },
+//     },
+//     {
+//         "Title": "The Land Before Time",
+//         "Description": "A young Apatosaurus named Littlefoot ends up alone after his mother is attacked by a vicious Tyrannosaurus rex and dies. Littlefoot flees famine and upheaval to search for the Great Valley.",
+//         "Genre": {
+//             "Name": "Animation",
+//             "Description": "An animated film is defined as a motion picture in which movement and characters' performances are created using a frame-by-frame technique"
+//         },
+//         "Director": {
+//             "Name": "Don Bluth",
+//             "Bio": "Don Bluth was one of the chief animators at Disney to come to the mantle after the great one's death. He eventually became the animation director for such films as The Rescuers (1977) and Pete's Dragon (1977). ",
+//             "Birth": 1937 
+//         },
+//     },
+// ];
 
 // Morgan middleware library to log all requests
 let myLogger = (req, res, next) => {
@@ -104,11 +104,13 @@ let myLogger = (req, res, next) => {
 app.use(myLogger);
 
 // Serves a “documentation.html” file using express.static;
-app.use(express.static(join(__dirname, 'public'))); 
+// app.use(express.static(join(__dirname, 'public'))); 
 
-app.get('/documentation.html', (req, res) => {
-    res.sendFile(join(__dirname, 'public', 'documentation.html'));
-});
+// app.get('/documentation.html', (req, res) => {
+//     res.sendFile(join(__dirname, 'public', 'documentation.html'));
+// });
+
+app.use(express.static('public'));
 
 // Express GET route located at endpoint '/'
 app.get('/', (req, res) => {
