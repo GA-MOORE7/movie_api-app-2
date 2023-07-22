@@ -10,8 +10,6 @@ const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
-const Genres = Models.Genre;
-const Directors = Models.Director;
 
 const PORT = 8080;
 
@@ -79,9 +77,9 @@ app.get('/movies/:Title', async (req, res) => {
 
 // 3. Return data about a genre (description) by name/title
 app.get('/genre/:Name', async (req, res) => {
-    await Genres.findOne({ Name: req.params.Name })
+    await Movies.findOne({ 'Genre.Name': req.params.Name })
         .then((genre) => {
-            res.json(genre.Description);
+            res.json(genre.Genre);
         })
         .catch((err) => {
             console.error(err);
@@ -91,9 +89,9 @@ app.get('/genre/:Name', async (req, res) => {
 
 // 4. Return data about a director by name
 app.get('/director/:Name', (req, res) => {
-    Directors.findOne( { Name: req.params.Name })
+    Movies.findOne( { 'Director.Name': req.params.Name })
     .then((director) => {
-        res.json(director);
+        res.json(director.Director);
     })
     .catch((err) => {
         console.error(err);
@@ -206,8 +204,6 @@ app.get('/secreturl', (req, res) => {
     res.send('This is a secret url with super top-secret content.');
 });
 
-
-
 // Get a user by username
 app.get('/users/:Username', (req, res) => {
     Users.findOne({ Username: req.params.Username })
@@ -220,34 +216,7 @@ app.get('/users/:Username', (req, res) => {
         });
     });
 
-
-// READ
-app.get('/movies/genre/:genreName', (req, res) => {
-    const { genreName } = req.params; // object detructuring
-    const genre = movies.find( movie => movie.Genre.Name === genreName ).Genre;
-
-    if (genre) {
-        res.status(200).json(genre);
-    } else {
-        res.status(400).send('no such genre')
-    }
-    
-});
-
-// READ
-app.get('/movies/directors/:directorName', (req, res) => {
-    const { directorName } = req.params; // object detructuring
-    const director = movies.find( movie => movie.Director.Name === directorName ).Director;
-
-    if (director) {
-        res.status(200).json(director);
-    } else {
-        res.status(400).send('no such director')
-    }
-    
-});
-
-// Error-handling function
+    // Error-handling function
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!')
