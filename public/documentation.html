@@ -32,21 +32,21 @@
             </tr>
             <tr>
                 <td>Return data about a single movie</td>
-                <td>/movies/:title</td>
+                <td>/movies/:Title</td>
                 <td>GET</td>
                 <td>None</td>
                 <td>A JSON object holding data about a single movie. Example:</td>
             </tr>
             <tr>
                 <td>Return data about a genre</td>
-                <td>/movies/genre/:genreName</td>
+                <td>/genre/:Name</td>
                 <td>GET</td>
                 <td>None</td>
                 <td>A JSON object holding data about a genre</td>
             </tr>
             <tr>
                 <td>Return data about a director</td>
-                <td>/movies/directors/:directorName</td>
+                <td>/director/:Name</td>
                 <td>GET</td>
                 <td>None</td>
                 <td>A JSON object holding data about a director</td>
@@ -58,44 +58,70 @@
                 <td> A JSON object holding data about the user to add, structured like:
                 <pre>
                     {
-                    "name": "Mary",
-                    "favoriteMovies":[]
-                }
+                        "Username": "gamoore7",
+                        "Password": "bookbinder6",
+                        "Email": "gerald.moore42@gmail.com",
+                        "Birth": "1989-12-18"    
+                    }
                 </pre>
                 </td>
                 <td>A JSON object holding data about the user that was added, structured like:
                     <pre>
                         {
-                        "name": "Mary",
-                        "favoriteMovies":[],
-                        "id": "388bf9b0-c2b6-4f21-ad01-ebd74ca4ccba"
-                    }
+                            "Username": "gamoore7",
+                            "Password": "bookbinder6",
+                            "Email": "gerald.moore42@gmail.com",
+                            "Birth": "1989-12-18T00:00:00.000Z",
+                            "FavoriteMovies": [],
+                            "_id": "64bc52d58bf19d6302425352",
+                            "__v": 0
+                        }
                     </pre></td>
             </tr>
             <tr>
                 <td>Allow users to update their user info</td>
-                <td>/users/:id</td>
+                <td>/users/:Username</td>
                 <td>PUT</td>
-                <td>None</td>
-                <td>A JSON object with the updated info</td>
-            </tr>
+                <td> A JSON object holding data about the user to update, structured like:
+                    <pre>
+                        {
+                            "Username": "gamoore7",
+                            "Password": "updatedpassword",
+                            "Email": "gerald.moore42@gmail.com",
+                            "Birth": "1989-12-18"    
+                        }
+                    </pre>
+                    </td>
+                    <td>A JSON object holding data about the user that was updated, structured like:
+                        <pre>
+                            {
+                                "_id": "64bc52d58bf19d6302425352",
+                                "Username": "gamoore7",
+                                "Password": "updatedpassword",
+                                "Email": "gerald.moore42@gmail.com",
+                                "Birth": "1989-12-18T00:00:00.000Z",
+                                "FavoriteMovies": [],
+                                "__v": 0
+                            }
+                        </pre></td>
+                </tr>
             <tr>
                 <td>Allow users to add a movie to their list of favorites</td>
-                <td>/users/:id/:movieTitle</td>
-                <td>PUT</td>
+                <td>/users/:Username/movies/:MovieID</td>
+                <td>POST</td>
                 <td>None</td>
                 <td>Send user a message that the new movie has been added to their list</td>
             </tr>
             <tr>
                 <td>Allow users to remove a movie to their list of favorites</td>
-                <td>/users/:id/:movieTitle</td>
+                <td>/users/:Username/movies/:MovieID</td>
                 <td>DELETE</td>
                 <td>None</td>
                 <td>Send user a text message informing them that the movie has been deleted from their list</td>
             </tr>
             <tr>
                 <td>Allow existing users to de-register</td>
-                <td>/users/:id</td>
+                <td>/users/:Username</td>
                 <td>DELETE</td>
                 <td>None</td>
                 <td>Send a text message indicating that the user has been deleted</td>
