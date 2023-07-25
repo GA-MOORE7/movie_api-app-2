@@ -19,6 +19,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/myFlixDB', {
 });
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 
 //log requests to server
 app.use(morgan('common'));
@@ -40,7 +44,7 @@ app.get('/', (req, res) => {
 });
 
 // 1. Get all movies
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
         .then((movies) => {
             res.status(201).json(movies);
@@ -64,7 +68,7 @@ app.get('/users', (req, res) => {
     });
 
 // 2. Get a movie by movie title
-app.get('/movies/:Title', async (req, res) => {
+app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.findOne({ Title: req.params.Title })
         .then((movie) => {
             res.json(movie);
@@ -76,7 +80,7 @@ app.get('/movies/:Title', async (req, res) => {
     });
 
 // 3. Return data about a genre (description) by name/title
-app.get('/genre/:Name', async (req, res) => {
+app.get('/genre/:Name', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.findOne({ 'Genre.Name': req.params.Name })
         .then((genre) => {
             res.json(genre.Genre);
@@ -88,7 +92,7 @@ app.get('/genre/:Name', async (req, res) => {
     });
 
 // 4. Return data about a director by name
-app.get('/director/:Name', (req, res) => {
+app.get('/director/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne( { 'Director.Name': req.params.Name })
     .then((director) => {
         res.json(director.Director);
@@ -127,7 +131,7 @@ app.post('/users', async (req, res) => {
     });
 
 // 6. Update a user's info, by username
-app.put('/users/:Username', async (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Users.findOneAndUpdate({ Username: req.params.Username 
     }, { $set: 
       {
@@ -149,7 +153,7 @@ app.put('/users/:Username', async (req, res) => {
 });
 
 // 7. Add a movie to a user's list of favorites
-app.post('/users/:Username/movies/:MovieID', async (req, res) => {
+app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Users.findOneAndUpdate({ Username: req.params.Username}, 
     {
         $push: { FavoriteMovies: req.params.MovieID }
@@ -165,7 +169,7 @@ app.post('/users/:Username/movies/:MovieID', async (req, res) => {
 });
 
 // 8. Delete a movie from a user's list of favorites
-app.delete('/users/:Username/movies/:MovieID', async (req, res) => {
+app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Users.findOneAndUpdate({ Username: req.params.Username}, 
     {
         $pull: { FavoriteMovies: req.params.MovieID }
@@ -182,7 +186,7 @@ app.delete('/users/:Username/movies/:MovieID', async (req, res) => {
     
 
 // 9. Delete a user by username
-app.delete('/users/:Username', async (req, res) => {
+app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Users.findOneAndRemove({ Username: req.params.Username })
         .then((user) => {
             if (!user) {
@@ -205,16 +209,16 @@ app.get('/secreturl', (req, res) => {
 });
 
 // Get a user by username
-app.get('/users/:Username', (req, res) => {
-    Users.findOne({ Username: req.params.Username })
-        .then((user) => {
-            res.json(user);
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
-        });
-    });
+// app.get('/users/:Username', (req, res) => {
+//     Users.findOne({ Username: req.params.Username })
+//         .then((user) => {
+//             res.json(user);
+//         })
+//         .catch((err) => {
+//             console.error(err);
+//             res.status(500).send('Error: ' + err);
+//         });
+//     });
 
     // Error-handling function
 app.use((err, req, res, next) => {
