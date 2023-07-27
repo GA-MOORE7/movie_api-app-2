@@ -21,6 +21,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/myFlixDB', {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 let auth = require('./auth')(app);
+const cors = require('cors');
+app.use(cors());
 const passport = require('passport');
 require('./passport');
 
@@ -105,6 +107,7 @@ app.get('/director/:Name', passport.authenticate('jwt', { session: false }), (re
 
 // 5. Allow new users to register
 app.post('/users', async (req, res) => {
+    let hashedPassword = Users.hashPassword(req.body.Password);
     await Users.findOne({ Username: req.body.Username })
         .then((user) => {
             if (user) {
@@ -113,7 +116,7 @@ app.post('/users', async (req, res) => {
               Users
                 .create({
                     Username: req.body.Username,
-                    Password: req.body.Password,
+                    Password: hashedPassword,
                     Email: req.body.Email, 
                     Birth: req.body.Birth,
                 })
