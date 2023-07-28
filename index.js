@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const app = express();
 const mongoose = require('mongoose');    
 const Models = require('./models.js'); 
+const { check, validationResult } = require('express-validator');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -106,7 +107,20 @@ app.get('/director/:Name', passport.authenticate('jwt', { session: false }), (re
 });
 
 // 5. Allow new users to register
-app.post('/users', async (req, res) => {
+app.post('/users', [
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()   
+], async (req, res) => {
+
+        // check the validation object for errors
+          let errors = validationResult(req);
+      
+          if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+          }
+      
     let hashedPassword = Users.hashPassword(req.body.Password);
     await Users.findOne({ Username: req.body.Username })
         .then((user) => {
@@ -134,7 +148,24 @@ app.post('/users', async (req, res) => {
     });
 
 // 6. Update a user's info, by username
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.put('/users/:Username',
+[
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
+], 
+passport.authenticate('jwt', { session: false }), async (req, res) => {
+
+    // check the validation object for errors
+      let errors = validationResult(req);
+  
+      if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+      }
+
+      let hashedPassword = Users.hashPassword(req.body.Password);    
+
     //condition to check 
     if(req.user.Username !== req.params.Username){
         return res.status(400).send('Permission denied');
@@ -143,7 +174,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), as
     }, { $set: 
       {
         Username: req.body.Username,
-        Password: req.body.Password,
+        Password: hashedPassword,
         Email: req.body.Email,
         Birth: req.body.Birth
       }
@@ -216,16 +247,16 @@ app.get('/secreturl', (req, res) => {
 });
 
 // Get a user by username
-// app.get('/users/:Username', (req, res) => {
-//     Users.findOne({ Username: req.params.Username })
-//         .then((user) => {
-//             res.json(user);
-//         })
-//         .catch((err) => {
-//             console.error(err);
-//             res.status(500).send('Error: ' + err);
-//         });
-//     });
+app.get('/users/:Username', (req, res) => {
+    Users.findOne({ Username: req.params.Username })
+        .then((user) => {
+            res.json(user);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+    });
 
     // Error-handling function
 app.use((err, req, res, next) => {
