@@ -24,8 +24,6 @@ mongoose.connect( process.env.CONNECTION_URI, {
 //     useUnifiedTopology: true 
 // });
 
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(cors());
