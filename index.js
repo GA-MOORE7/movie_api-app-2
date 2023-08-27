@@ -7,28 +7,30 @@ const morgan = require('morgan');
 const app = express();
 const mongoose = require('mongoose');    
 const Models = require('./models.js'); 
+const cors = require('cors');
 const { check, validationResult } = require('express-validator');
 
 const Movies = Models.Movie;
 const Users = Models.User;
 
 const PORT = 8080;
+mongoose.connect( process.env.CONNECTION_URI, { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+});
 
 // mongoose.connect('mongodb://127.0.0.1:27017/test', { 
 //     useNewUrlParser: true, 
 //     useUnifiedTopology: true 
 // });
 
-mongoose.connect( process.env.CONNECTION_URI, { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true 
-});
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
-let auth = require('./auth')(app);
-const cors = require('cors');
 app.use(cors());
+
+let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
