@@ -290,7 +290,7 @@ passport.authenticate('jwt', { session: false }), async (req, res) => {
  *
  * @function
  * @name addFavoriteMovies
- * @param {Object} req - Express request object with parameters: id (user ID), movieId (movie ID).
+ * @param {Object} req - Express request object with parameters: Username, movieID.
  * @param {Object} res - Express response object.
  * @returns {Promise<void>} - A Promise that resolves when the movie addition process is complete.
  * @throws {Error} - If there is an unexpected error during the process or if permission is denied.
@@ -318,7 +318,7 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
  *
  * @function
  * @name deleteFavoriteMovie
- * @param {Object} req - Express request object with parameters: id (user ID), movieId (movie ID).
+ * @param {Object} req - Express request object with parameters: Username, MovieID.
  * @param {Object} res - Express response object.
  * @returns {Promise<void>} - A Promise that resolves when the movie removal process is complete.
  * @throws {Error} - If there is an unexpected error during the process or if permission is denied.
@@ -345,7 +345,7 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
  *
  * @function
  * @name deleteUser
- * @param {Object} req - Express request object with parameters: id (user ID).
+ * @param {Object} req - Express request object with parameters: Username.
  * @param {Object} res - Express response object.
  * @returns {Promise<void>} - A Promise that resolves when the user deletion process is complete.
  * @throws {Error} - If there is an unexpected error during the process or if permission is denied.
