@@ -1,4 +1,32 @@
-// require express/morgan in the 'index.js' file
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: index.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: index.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// require express/morgan in the 'index.js' file
 const express = require('express'),
     bodyParser = require('body-parser'),
     uuid = require('uuid'); 
@@ -74,7 +102,7 @@ app.get('/', (req, res) => {
  * @name getAllMovies
  * @param {Object} req - Express request object.
  * @param {Object} res - Express response object.
- * @returns {Promise<void>} - A Promise that resolves when the movie request process is complete.
+ * @returns {Promise&lt;void>} - A Promise that resolves when the movie request process is complete.
  * @throws {Error} - If there is an unexpected error during the process or if permission is denied.
  * @returns {Object}[] allMovies - The array of all movies in the database.
  * 
@@ -111,7 +139,7 @@ app.get('/users', (req, res) => {
  * @name getOneMovie
  * @param {Object} req - Express request object with parameter: movieId (movie ID).
  * @param {Object} res - Express response object.
- * @returns {Promise<void>} - A Promise that resolves when the movie request process is complete.
+ * @returns {Promise&lt;void>} - A Promise that resolves when the movie request process is complete.
  * @throws {Error} - If there is an unexpected error during the process or if permission is denied.
  * @returns {Object} reqMovie - The object containing the data for the requested movie.
  * 
@@ -135,7 +163,7 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), asyn
  * @name getGenre
  * @param {Object} req - Express request object with parameter: genreName (genre name).
  * @param {Object} res - Express response object.
- * @returns {Promise<void>} - A Promise that resolves when the genre request process is complete.
+ * @returns {Promise&lt;void>} - A Promise that resolves when the genre request process is complete.
  * @throws {Error} - If there is an unexpected error during the process or if permission is denied.
  * @returns {Object} reqGenre - The object containing the data for the requested genre.
  * 
@@ -159,7 +187,7 @@ app.get('/genre/:Name', passport.authenticate('jwt', { session: false }), async 
  * @name getOneDirector
  * @param {Object} req - Express request object with parameter: Name (director name).
  * @param {Object} res - Express response object.
- * @returns {Promise<void>} - A Promise that resolves when the director request process is complete.
+ * @returns {Promise&lt;void>} - A Promise that resolves when the director request process is complete.
  * @throws {Error} - If there is an unexpected error during the process or if permission is denied.
  * @returns {Object} reqDirector - The object containing the data for the requested director.
  * 
@@ -183,7 +211,7 @@ app.get('/director/:Name', passport.authenticate('jwt', { session: false }), (re
  * @name createUser
  * @param {Object} req - Express request object.
  * @param {Object} res - Express response object.
- * @returns {Promise<void>} - A Promise that resolves when the user creation process is complete.
+ * @returns {Promise&lt;void>} - A Promise that resolves when the user creation process is complete.
  * @throws {Error} - If there is an unexpected error during the user creation process.
  * @returns {Object} newUser - The newly created user object. Sent in the response on success.
  * 
@@ -236,7 +264,7 @@ app.post('/users', [
  * @name updateUser
  * @param {Object} req - Express request object with parameters: Username.
  * @param {Object} res - Express response object.
- * @returns {Promise<void>} - A Promise that resolves when the user update process is complete.
+ * @returns {Promise&lt;void>} - A Promise that resolves when the user update process is complete.
  * @throws {Error} - If there is an unexpected error during the process or if permission is denied.
  * @fires {Object} updatedUser - The updated user object sent in the response on success.
  * @description
@@ -292,7 +320,7 @@ passport.authenticate('jwt', { session: false }), async (req, res) => {
  * @name addFavoriteMovies
  * @param {Object} req - Express request object with parameters: id (user ID), movieId (movie ID).
  * @param {Object} res - Express response object.
- * @returns {Promise<void>} - A Promise that resolves when the movie addition process is complete.
+ * @returns {Promise&lt;void>} - A Promise that resolves when the movie addition process is complete.
  * @throws {Error} - If there is an unexpected error during the process or if permission is denied.
  * @returns {Object} updatedUser - The updated user object (including the added movie) sent in the response on success.
  */
@@ -320,7 +348,7 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
  * @name deleteFavoriteMovie
  * @param {Object} req - Express request object with parameters: id (user ID), movieId (movie ID).
  * @param {Object} res - Express response object.
- * @returns {Promise<void>} - A Promise that resolves when the movie removal process is complete.
+ * @returns {Promise&lt;void>} - A Promise that resolves when the movie removal process is complete.
  * @throws {Error} - If there is an unexpected error during the process or if permission is denied.
  * @fires {Object} updatedUser - The updated user object (after removing the movie) sent in the response on success.
  */
@@ -347,7 +375,7 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
  * @name deleteUser
  * @param {Object} req - Express request object with parameters: id (user ID).
  * @param {Object} res - Express response object.
- * @returns {Promise<void>} - A Promise that resolves when the user deletion process is complete.
+ * @returns {Promise&lt;void>} - A Promise that resolves when the user deletion process is complete.
  * @throws {Error} - If there is an unexpected error during the process or if permission is denied.
  * @fires {string} message - A message indicating the result of the user deletion process.
  */
@@ -401,3 +429,26 @@ app.listen(port, '0.0.0.0',() => {
 
 
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addFavoriteMovies">addFavoriteMovies</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteFavoriteMovie">deleteFavoriteMovie</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#getAllMovies">getAllMovies</a></li><li><a href="global.html#getGenre">getGenre</a></li><li><a href="global.html#getOneDirector">getOneDirector</a></li><li><a href="global.html#getOneMovie">getOneMovie</a></li><li><a href="global.html#updateUser">updateUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Jan 23 2024 15:05:47 GMT+0200 (South Africa Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
