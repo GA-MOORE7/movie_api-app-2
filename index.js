@@ -14,7 +14,7 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 const PORT = 8080;
-mongoose.connect( 'process.env.CONNECTION_URI', { 
+mongoose.connect(process.env.CONNECTION_URI, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true 
 });
